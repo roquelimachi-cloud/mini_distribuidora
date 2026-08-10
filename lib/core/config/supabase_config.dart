@@ -1,9 +1,6 @@
 class SupabaseConfig {
-  static const String url = String.fromEnvironment(
-    'SUPABASE_URL',
-  );
+  static const String url = 'https://onhllqobqmtgyzafzfrd.supabase.co';
 
-  static const String publishableKey = String.fromEnvironment(
-    'SUPABASE_PUBLISHABLE_KEY',
-  );
+  static const String publishableKey =
+      'sb_publishable_83aPLdMTlwwareb5GUz08g_fy6-k-PW';
 }
