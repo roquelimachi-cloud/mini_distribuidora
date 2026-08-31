@@ -5,6 +5,9 @@ import 'core/config/supabase_config.dart';
 import 'pages/ventas_page.dart';
 import 'pages/compras_page.dart';
 import 'pages/productos_page.dart';
+import 'pages/proveedores_page.dart';
+import 'pages/login_page.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -28,7 +31,17 @@ class MiniDistribuidoraApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.blue,
       ),
-      home: const DashboardPage(),
+      home: LoginPage(
+        onLoginSuccess: (context) async {
+          await Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  const DashboardPage(),
+            ),
+          );
+        },
+      ),
     );
   }
 }
@@ -351,7 +364,19 @@ if (ventaIds.isNotEmpty) {
 
     await cargarDashboard();
   }
+Future<void> abrirProveedores() async {
+  await Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) =>
+          const ProveedoresPage(),
+    ),
+  );
 
+  if (!mounted) return;
+
+  await cargarDashboard();
+}
   Future<void> actualizarDashboard() async {
     setState(() {
       cargando = true;
@@ -393,6 +418,13 @@ if (ventaIds.isNotEmpty) {
               Icons.inventory_2,
             ),
           ),
+  IconButton(
+  tooltip: 'Proveedores',
+  onPressed: abrirProveedores,
+  icon: const Icon(
+    Icons.business,
+  ),
+),
           IconButton(
             tooltip: 'Actualizar',
             onPressed: actualizarDashboard,
